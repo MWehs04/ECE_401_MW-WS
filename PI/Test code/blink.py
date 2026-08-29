@@ -4,23 +4,17 @@ from utime import sleep
 
 # Configure the WS2812 RGB LED on GPIO 16 (1 pixel)
 np = neopixel.NeoPixel(machine.Pin(16), 1)
-
+Buzzer = machine.Pin(8, machine.Pin.OUT)
 print("LED starts flashing white...")
 
 while True:
-    try:
-        # Toggle between White (255, 255, 255) and Off (0, 0, 0)
-        if np[0] == (0, 0, 0):
-            np[0] = (255, 255, 255)  # White
-        else:
-            np[0] = (0, 0, 0)        # Off
+    for i in range(3):  # Flash 3 times
+        for i in range(3):  # Flash 3 times
+            Buzzer.value(1)  # Turn on buzzer
+            sleep(0.5)  # Wait for 0.5 seconds
+            Buzzer.value(0)  # Turn off buzzer
+            sleep(.75)
+        sleep(3)
+    sleep(1500)
 
-        np.write()
-        sleep(1)
-    except KeyboardInterrupt:
-        break
-
-# Turn off LED on exit
-np[0] = (0, 0, 0)
-np.write()
 print("Finished.")

@@ -24,3 +24,5 @@ while True:
 np[0] = (0, 0, 0)
 np.write()
 print("Finished.")
+
+#will was here
